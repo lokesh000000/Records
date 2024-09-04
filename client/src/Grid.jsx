@@ -12,7 +12,7 @@ const Grid = () => {
 
   const fetchRecords = async () => {
     try {
-      const response = await axios.get('http://localhost:4000/api/records');
+      const response = await axios.get('/api/records');
       setRecords(response.data);
     } catch (error) {
       console.error('Error fetching records:', error);
@@ -29,7 +29,7 @@ const Grid = () => {
       if(!newRecord.name || !newRecord.age || !newRecord.email){
         return alert("Please Enter all the details")
       }
-      await axios.post('http://localhost:4000/api/records', newRecord);
+      await axios.post('/api/records', newRecord);
       fetchRecords();
       setNewRecord({ name: '', age: '', email: '' });
     } catch (error) {
@@ -44,7 +44,7 @@ const Grid = () => {
 
   const handleUpdate = async () => {
     try {
-      await axios.put(`http://localhost:4000/api/records/${editing}`, newRecord);
+      await axios.put(`/api/records/${editing}`, newRecord);
       fetchRecords();
       setEditing(null);
       setNewRecord({ name: '', age: '', email: '' });
@@ -55,7 +55,7 @@ const Grid = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:4000/api/records/${id}`);
+      await axios.delete(`/api/records/${id}`);
       fetchRecords();
     } catch (error) {
       console.error('Error deleting record:', error);
