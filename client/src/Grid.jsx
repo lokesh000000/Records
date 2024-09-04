@@ -70,7 +70,7 @@ const Grid = () => {
 
   return (
     <div>
-      <h2>Editable Grid</h2>
+      <h2>Records</h2>
       <div>
         <input
           type="text"
