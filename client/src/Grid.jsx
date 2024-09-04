@@ -74,7 +74,7 @@ const Grid = () => {
           placeholder="Name"
         />
         <input
-          type="number"
+          type="text"
           name="age"
           value={newRecord.age}
           onChange={handleChange}
