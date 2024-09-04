@@ -5,6 +5,7 @@ const Grid = () => {
   const [records, setRecords] = useState([]);
   const [newRecord, setNewRecord] = useState({ name: '', age: '', email: '' });
   const [editing, setEditing] = useState(null);
+  const[loading ,setLoading]=useState(false)
 
   useEffect(() => {
     fetchRecords();
@@ -12,11 +13,13 @@ const Grid = () => {
 
   const fetchRecords = async () => {
     try {
+      setLoading(true)
       const response = await axios.get('/api/records');
       setRecords(response.data);
     } catch (error) {
       console.error('Error fetching records:', error);
     }
+    setLoading(false)
   };
 
   const handleChange = (e) => {
@@ -25,6 +28,8 @@ const Grid = () => {
   };
 
   const handleAdd = async () => {
+
+    setLoading(true)
     try {
       if(!newRecord.name || !newRecord.age || !newRecord.email){
         return alert("Please Enter all the details")
@@ -35,6 +40,7 @@ const Grid = () => {
     } catch (error) {
       console.error('Error adding record:', error);
     }
+    setLoading(false)
   };
 
   const handleEdit = async (record) => {
@@ -88,9 +94,9 @@ const Grid = () => {
           placeholder="Email"
         />
         {editing ? (
-          <button onClick={handleUpdate}>Update</button>
+          <button onClick={handleUpdate} disabled={loading ==true}>Update</button>
         ) : (
-          <button onClick={handleAdd}>Add</button>
+          <button onClick={handleAdd} disabled={loading ==true}>Add</button>
         )}
       </div>
       <table>
